@@ -1,10 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import {Editor, EditorState} from './components/draft-js/';
 import './App.css';
 
 const App = () => {
+
+  const [editorState, setEditorState] = useState(null)
+  const [editor, setEditor] = useState(null);
+
+  useEffect(() => {
+    if(editor){
+      editor.focus();
+    }
+  })
+
+  var onChange = (newEditorState) => {
+    setEditorState(newEditorState)
+  }
+
   return <>
-    <h1>Hello World</h1>
+    <Editor
+      ref={setEditor}
+      editorState={editorState}
+      onChange={onChange}></Editor>
   </>
 }
 
